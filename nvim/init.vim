@@ -16,7 +16,7 @@ set nu
 set nowrap
 set noswapfile
 set nobackup
-set undodir=~/.nvim/undodir
+set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set signcolumn=yes
@@ -24,9 +24,10 @@ set cmdheight=2
 set updatetime=50
 set shortmess+=c
 set completeopt=menuone,noinsert,noselect
+set background=dark
 
 
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'morhetz/gruvbox'
@@ -39,6 +40,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tribela/vim-transparent'
 
 call plug#end()
 
@@ -104,31 +106,9 @@ endfunction
 
 colorscheme gruvbox
 set colorcolumn=80
-highlight Normal guibg=none
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfun
-
-" coc config
-" gd to go to definition
-" ctrl + o to go back to definition
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint',
-  \ 'coc-prettier',
-  \ 'coc-json',
-  \ 'coc-python',
-  \ ]
-
-" prettier command for coc
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-augroup ARUNKUMAR
-    autocmd!
-    autocmd BufWritePre * :call TrimWhitespace()
-augroup END
